@@ -4,6 +4,7 @@ var randomWords = require('random-words');
 
 var wordBank = function(){
 	var generateWords = randomWords({ exactly: 20 });
+	return generateWords;
 }
 
 module.exports = wordBank;

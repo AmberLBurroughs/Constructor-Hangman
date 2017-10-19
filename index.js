@@ -1,10 +1,59 @@
 var inquirer = require('inquirer');
 var wordBank = require('./modules/wordBank');
+var WordConstructor = require('./modules/word');
 
-function gameState(){
-	console.log(wordBank());
+var gameState = {
+	wins: 0,
+	losses: 0,
+	round: 0,
 }
-gameState();
+
+function newRound(){
+	gameState.round++;
+	console.log("round: ", gameState.round);
+	var words = wordBank();
+	var currentWord = (words.splice(0, 1)).join("");
+	var newWord = new WordConstructor(currentWord);
+}
+
+function gameReset(){
+	for (var key in gameState) {
+		if(gameState[key] > 0){
+			console.log(key, ": ", gameState[key]);
+			key = 0;
+		}else {
+			gameState[key] = 0;
+		}
+  }
+ 	console.log("see you next time!");
+}
+
+function playGame(){
+	//var words = wordBank();
+	if(gameState.round < 21){
+		inquirer.prompt([
+			{
+				type: 'confirm',
+				message: "would you like a new word?",
+				name: "newWord",
+				default: true
+			}
+		]).then(function(userResponse){
+			// turnary
+			userResponse.newWord ?
+			// if true
+			  newRound()
+			:
+			// if false
+				gameReset()
+		})
+	} else {
+		return console.log("thanks for playing!");
+	}	 
+
+}
+
+playGame();
 
 
 /*
