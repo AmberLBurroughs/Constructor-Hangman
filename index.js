@@ -1,6 +1,6 @@
 var inquirer = require('inquirer');
 var wordBank = require('./modules/wordBank');
-var WordConstructor = require('./modules/word');
+var GameWord = require('./modules/word');
 
 var gameState = {
 	wins: 0,
@@ -11,21 +11,52 @@ var gameState = {
 function newRound(){
 	gameState.round++;
 	console.log("round: ", gameState.round);
+
 	var words = wordBank();
 	var currentWord = (words.splice(0, 1)).join("");
-	var newWord = new WordConstructor(currentWord);
+	var newWord = new GameWord(currentWord);
+	newWord.displayCharacters(newWord.letterObjects, newWord.displayStr);
 }
+
 
 function gameReset(){
 	for (var key in gameState) {
 		if(gameState[key] > 0){
+			console.log("\n");
 			console.log(key, ": ", gameState[key]);
 			key = 0;
 		}else {
 			gameState[key] = 0;
 		}
   }
+  console.log("\n");
+  console.log(
+				'(|(|'
+			)
+	console.log(
+		    //'(‘.‘)'
+			 '( -.-)'
+			)
+	console.log(
+				'O_(")(")'
+			)
  	console.log("see you next time!");
+ 	console.log("\n");
+}
+
+function guessLetter(){
+	guessCount ? 
+		inquirer.prompt([
+			{
+				type: 'list',
+				message: "select a letter: ",
+				name: "alphabet",
+				choices: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+			} //use input and validate
+		]).then(function(userGuess){
+			
+		})
+	:
 }
 
 function playGame(){
@@ -49,6 +80,7 @@ function playGame(){
 		})
 	} else {
 		return console.log("thanks for playing!");
+		console.log("╮(╯▽╰)╭");
 	}	 
 
 }
