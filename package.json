@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/AmberLBurroughs/Constructor-Hangman#readme",
   "dependencies": {
+    "alphabet": "^1.0.0",
     "inquirer": "^3.3.0",
     "random-words": "0.0.1"
   }

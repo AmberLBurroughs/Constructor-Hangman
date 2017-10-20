@@ -2,14 +2,17 @@
 var GameLetter = require("./letter")
 
 var GameWord = function(word){
-	this.guessCount = 10;
 	this.newWord = word;
 	this.letterObjects = [];
 	this.displayStr = "";
-	//console.log("word: ", this.newWord);
-
 	this.wordArr = this.newWord.split("");
-	console.log("word array: ", this.wordArr);
+	this.wordLetters = this.wordArr.filter(function(item, pos) {
+	    return this.wordArr.indexOf(item) == pos;
+	});
+
+	this.guessLetter = function(wordLetters, letterObjects, ){
+
+	}
 
 	this.createLetterObj = function(wordArr, letterObjects){
 		wordArr.forEach(function(letter){
@@ -27,7 +30,7 @@ var GameWord = function(word){
 			//console.log("letterObject underScore: ", letterObject.currentVal);
 			displayStr += letterObject.currentVal;
 		})
-		console.log(displayStr);
+		console.log("word: ", displayStr);
 	}
 }
 

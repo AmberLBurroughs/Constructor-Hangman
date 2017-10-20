@@ -3,7 +3,7 @@
 var GameLetter = function(letter){
 	this.character = letter !== " " ? "_" : " ";
 	this.letter = letter;
-	this.currentVal = this.character + " ";
+	this.currentVal = " " + this.character;
 	this.isLetter = false;
 
 /* 
