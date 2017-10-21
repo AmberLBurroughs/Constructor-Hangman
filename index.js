@@ -37,7 +37,6 @@ function newRound(){
 
 
 function gameReset(){
-	//hard code 
 	for (var key in gameState) {
 		if(gameState[key] > 0 && key != "guesses left"){
 			console.log("\n");
@@ -46,8 +45,8 @@ function gameReset(){
 		}else {
 			if(key === "guesses left"){
 				gameState[key] = 10;
-			}else if(gameState[key].length > 0){
-				gameState[key] = "";
+			}else if(gameState.lettersGuessed.length > 0){
+				gameState[lettersGuessed] = "";
 			}else{
 				gameState[key] = 0;
 			}
@@ -59,7 +58,6 @@ function gameReset(){
 				'(|(|'
 			)
 	console.log(
-		    //'(‘.‘)'
 			 '( -.-)'
 			)
 	console.log(
