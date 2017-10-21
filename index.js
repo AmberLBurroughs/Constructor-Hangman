@@ -29,8 +29,6 @@ function newRound(){
 	console.log("\n");
 	var words = wordBank();
 	var newWord = words.join("");
-	//(words.splice(0, 1)).join("");
-	console.log(newWord); //TODO: remove
 	gameState.currentWord = new GameWord(newWord);
 	console.log("\n");
 	

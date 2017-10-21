@@ -33,7 +33,7 @@ class GameWord {
 		this.letterObjects.forEach(function(letterObject){
 			displayStr += letterObject.currentVal + ' ';
 		})
-		//console.log("word: ", displayStr);
+		console.log("word: ", displayStr);
 
 	}
 
