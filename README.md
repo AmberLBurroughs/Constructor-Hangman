@@ -12,6 +12,8 @@ Clone to a local repository.
 
 Required packages - `npm i` 
 * [inquirer](https://www.npmjs.com/package/inquirer)
+* [alphabet](https://www.npmjs.com/package/alphabet)
+* [random-words](https://www.npmjs.com/package/random-words)
 ## Usage
 
 `node index.js`
