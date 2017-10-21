@@ -1,6 +1,6 @@
 # Constructor-Hangman
  a hangman command-line game using constructor functions
- <img src="/assets/poster.jpg?raw=true" >
+ <img src="/assets/poster.gif?raw=true" >
 
 ## Getting Started
 
