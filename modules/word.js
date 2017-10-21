@@ -1,46 +1,78 @@
-// -Word: Used to create an object representing the current word the user is attempting to guess. This should contain word specific logic and data.
 var GameLetter = require("./letter")
 
-var GameWord = function(word){
-	this.newWord = word;
-	this.letterObjects = [];
-	this.displayStr = "";
-	this.wordArr = this.newWord.split("");
-	console.log(this.wordArr);
-	this.wordLetters = this.wordArr.filter(function(letter, pos) {
-		console.log(this.wordArr);
-		// console.log(letter);
-		// console.log(pos);
-		// console.log(this.wordArr.indexOf(letter));
-	    //return this.wordArr.indexOf(letter) == pos;
-	});
+class GameWord {
 
-	this.guessLetter = function(wordLetters, letterObjects){
-		// check if letter is in word array
-	  // loop through gameWord.letterObjects check letter value if userGuess.letterChoice
-	  // userGuess.isLetter to true
-	  // inform user if their guess was right or wrong
-	  //console.log(userGuess.letterChoice);
+	// for all new words 
+	constructor(word){
+		this.newWord = word;
+		//console.log(this.newWord);
+		this.displayStr = "";
+		this.wordArr = this.newWord.split("");
+		
+		this.wordLetters = word.split("").filter(function(letter, pos) {
+		    return word.split("").indexOf(letter) == pos;
+		});
+
+		this.letterObjects = [];
+		this.createLetterObjs();
 	}
 
-	this.createLetterObj = function(wordArr, letterObjects){
-		wordArr.forEach(function(letter){
-			//console.log("word letter: ", letter);
-			var newLetter = new GameLetter(letter);
-			letterObjects.push(newLetter);
-		})
-		//console.log("letterObjects: ", letterObjects);	
+	// send current word through letter constructor
+	createLetterObjs(){
+		var letterObjects = this.letterObjects;
+	 	this.wordArr.forEach(function(letter){
+	 		var newLetter = new GameLetter(letter);
+	 		letterObjects.push(newLetter);
+	 	})	
 	}
 
-	this.createLetterObj(this.wordArr, this.letterObjects);
+ // show dashes
+	displayCharacters(){
 
-	this.displayCharacters = function(letterObjects, displayStr){
-		letterObjects.forEach(function(letterObject){
-			//console.log("letterObject underScore: ", letterObject.currentVal);
-			displayStr += letterObject.currentVal;
+		var displayStr = "";	
+		this.letterObjects.forEach(function(letterObject){
+			displayStr += letterObject.currentVal + ' ';
 		})
 		console.log("word: ", displayStr);
+
+	}
+
+	// validate letter guessed
+	guessedLetter(currentLetter, callbackA, callbackB, gameState){
+		//console.log("guessed letter Gameword: ",currentLetter);
+		var wordLetters = this.wordLetters;
+		
+		if(wordLetters.includes(currentLetter)) {
+			console.log("correct!");
+			this.letterObjects.forEach(function(letterObject){
+				// console.log(letterObject);
+				if(!letterObject.isLetter && letterObject.letter === currentLetter){
+					//console.log("true");
+					letterObject.isLetter = true;
+					letterObject.currentVal = currentLetter;
+				}
+			})
+
+		  var index = wordLetters.indexOf(currentLetter);
+		  wordLetters.splice(index, 1);
+		  if(wordLetters.length != 0){
+		  	callbackA();
+		  } else if (wordLetters.length === 0){
+		  	gameState.wins++;
+		  	console.log(this.newWord, " was the word. You win!")
+		  	callbackB();
+		  } else {
+		  	gameState.losses++;
+		  	console.log(this.newWord, " was the word. You lose");
+
+		  	callbackB();
+		  }
+		} else {
+			console.log("the word does not include: ", currentLetter);
+			callbackA();
+		}
 	}
 }
+
 
 module.exports = GameWord;

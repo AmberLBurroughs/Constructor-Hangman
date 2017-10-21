@@ -8,7 +8,8 @@ var gameState = {
 	losses: 0,
 	"guesses left": 10,
 	round: 0,
-	lettersGuessed: []
+	lettersGuessed: [],
+	currentWord: undefined
 }
 
 function newRound(){
@@ -25,12 +26,13 @@ function newRound(){
 	console.log("-----------------------");
 	console.log("\n");
 	var words = wordBank();
-	var currentWord = words.join("");
+	var newWord = words.join("");
 	//(words.splice(0, 1)).join("");
-	var newWord = new GameWord(currentWord);
+	console.log(newWord); //TODO: remove
+	gameState.currentWord = new GameWord(newWord);
 	console.log("\n");
 	
-	guessLetter(newWord);
+	guessLetter();
 }
 
 
@@ -67,11 +69,11 @@ function gameReset(){
  	console.log("\n");
 }
 
-function guessLetter(newWord){
+function guessLetter(){
 	console.log("###########################");
 	console.log("\nguesses: ", gameState["guesses left"]);
 	console.log("\n");
-	newWord.displayCharacters(newWord.letterObjects, newWord.displayStr);
+	gameState.currentWord.displayCharacters();
 	console.log("\n###########################");
 	console.log("\n");
 	(gameState["guesses left"] > 0) ? 
@@ -85,37 +87,34 @@ function guessLetter(newWord){
 		]).then(function(userGuess){
 			if(!gameState.lettersGuessed.includes(userGuess.letterChoice) && gameState["guesses left"] > 0){
 				gameState.lettersGuessed.push(userGuess.letterChoice);
-				console.log("letters Guessed: ", gameState.lettersGuessed);
+				//console.log("letters Guessed: ", gameState.lettersGuessed);
 				gameState["guesses left"]--;
 
 				// send to 
-					newWord.guessLetter(userGuess.letterChoice);
-
-				  guessLetter(newWord);
+				gameState.currentWord.guessedLetter(userGuess.letterChoice, guessLetter, playGame, gameState);
 			 // 
 			}else if(gameState.lettersGuessed.includes(userGuess.letterChoice) && gameState["guesses left"] > 0){
-				console.log("letters Guessed: ", gameState.lettersGuessed);
+				//console.log("letters Guessed: ", gameState.lettersGuessed);
 				console.log("\nguess a letter you haven't already selected");
-				guessLetter(newWord);
+				guessLetter();
 			}
 		})
 	:
 	// game over 
-		playAgain()
-	// // play again
-		// 
+	
+		outOfGuesses()
 }
 
-function playAgain(){
-		console.log("you are out of guesses >_< game over!")
-		gameState.lettersGuessed = [];
-		gameState["guesses left"] = 10;
-		gameState.losses++;
-		playGame();
-	}
+function outOfGuesses(){
+	console.log("Out of Guesses. ", gameState.currentWord.newWord, " was the word. You lose");
+	gameState.losses++;
+	playGame();
+}
 
 function playGame(){
 	//var words = wordBank();
+	gameState.lettersGuessed = [];
+	gameState["guesses left"] = 10;
 	if(gameState.round < 21){
 		inquirer.prompt([
 			{
