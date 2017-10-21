@@ -70,11 +70,11 @@ function gameReset(){
 }
 
 function guessLetter(){
-	console.log("###########################");
+	console.log("#################################");
 	console.log("\nguesses: ", gameState["guesses left"]);
 	console.log("\n");
 	gameState.currentWord.displayCharacters();
-	console.log("\n###########################");
+	console.log("\n#################################");
 	console.log("\n");
 	(gameState["guesses left"] > 0) ? 
 		inquirer.prompt([
@@ -96,6 +96,7 @@ function guessLetter(){
 			}else if(gameState.lettersGuessed.includes(userGuess.letterChoice) && gameState["guesses left"] > 0){
 				//console.log("letters Guessed: ", gameState.lettersGuessed);
 				console.log("\nguess a letter you haven't already selected");
+				console.log("\n");
 				guessLetter();
 			}
 		})
@@ -106,7 +107,11 @@ function guessLetter(){
 }
 
 function outOfGuesses(){
-	console.log("Out of Guesses. ", gameState.currentWord.newWord, " was the word. You lose");
+	console.log("\n---------------------------------")
+	console.log("\n ╮(╯▽╰)╭");
+	console.log("\n Out of Guesses.", gameState.currentWord.newWord, "was the word. You lose");
+	console.log("\n---------------------------------")
+	console.log("\n");
 	gameState.losses++;
 	playGame();
 }

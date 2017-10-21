@@ -59,16 +59,22 @@ class GameWord {
 		  	callbackA();
 		  } else if (wordLetters.length === 0){
 		  	gameState.wins++;
-		  	console.log(this.newWord, " was the word. You win!")
+		  	console.log("\n---------------------------------");
+		  	console.log("\n", this.newWord, "was the word. You win!");
+		  	console.log("\n---------------------------------")
+		  	console.log("\n");
 		  	callbackB();
 		  } else {
 		  	gameState.losses++;
-		  	console.log(this.newWord, " was the word. You lose");
-
+		  	console.log("\n---------------------------------");
+		  	console.log("\n ╮(╯▽╰)╭");
+		  	console.log("\n", this.newWord, "was the word. You lose");
+		  	console.log("\n---------------------------------")
+		  	console.log("\n");
 		  	callbackB();
 		  }
 		} else {
-			console.log("the word does not include: ", currentLetter);
+			console.log(" the word does not include:", currentLetter);
 			callbackA();
 		}
 	}
