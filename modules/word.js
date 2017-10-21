@@ -39,20 +39,19 @@ class GameWord {
 
 	// validate letter guessed
 	guessedLetter(currentLetter, callbackA, callbackB, gameState){
-		//console.log("guessed letter Gameword: ",currentLetter);
 		var wordLetters = this.wordLetters;
 		
+		// check if letter guessed is in the current word
 		if(wordLetters.includes(currentLetter)) {
 			console.log("correct!");
 			this.letterObjects.forEach(function(letterObject){
-				// console.log(letterObject);
 				if(!letterObject.isLetter && letterObject.letter === currentLetter){
-					//console.log("true");
 					letterObject.isLetter = true;
 					letterObject.currentVal = currentLetter;
 				}
 			})
 
+			// get index of letter in current word
 		  var index = wordLetters.indexOf(currentLetter);
 		  wordLetters.splice(index, 1);
 		  if(wordLetters.length != 0){
@@ -73,12 +72,14 @@ class GameWord {
 		  	console.log("\n");
 		  	callbackB();
 		  }
+
 		} else {
 			console.log(" the word does not include:", currentLetter);
 			callbackA();
 		}
-	}
-}
 
+	}
+
+}
 
 module.exports = GameWord;
