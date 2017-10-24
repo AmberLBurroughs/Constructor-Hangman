@@ -1,5 +1,5 @@
 # Constructor-Hangman
- a hangman command-line game using constructor functions
+ a word trive command-line game using command prompts
  <img src="/assets/poster.gif" >
 
 ## Getting Started
