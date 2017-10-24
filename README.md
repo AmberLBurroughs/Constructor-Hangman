@@ -1,4 +1,4 @@
-# Constructor-Hangman
+# Node Word Trivia
  a word trive command-line game using command prompts
  <img src="/assets/poster.gif" >
 
