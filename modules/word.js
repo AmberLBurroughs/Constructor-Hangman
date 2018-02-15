@@ -77,7 +77,6 @@ class GameWord {
 			console.log(" the word does not include:", currentLetter);
 			callbackA();
 		}
-
 	}
 
 }
