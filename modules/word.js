@@ -54,12 +54,13 @@ class GameWord {
 			// get index of letter in current word
 		  var index = wordLetters.indexOf(currentLetter);
 		  wordLetters.splice(index, 1);
+		  var currentWord = this.newWord
 		  if(wordLetters.length != 0){
 		  	callbackA();
 		  } else if (wordLetters.length === 0){
 		  	gameState.wins++;
 		  	console.log("\n---------------------------------");
-		  	console.log("\n", this.newWord, "was the word. You win!");
+		  	console.log("\n", currentWord.toUpperCase(), "was the word. You win!");
 		  	console.log("\n---------------------------------")
 		  	console.log("\n");
 		  	callbackB();
@@ -67,7 +68,7 @@ class GameWord {
 		  	gameState.losses++;
 		  	console.log("\n---------------------------------");
 		  	console.log("\n ╮(╯▽╰)╭");
-		  	console.log("\n", this.newWord, "was the word. You lose");
+		  	console.log("\n", currentWord.toUpperCase(), "was the word. You lose");
 		  	console.log("\n---------------------------------")
 		  	console.log("\n");
 		  	callbackB();
@@ -78,7 +79,6 @@ class GameWord {
 			callbackA();
 		}
 	}
-
 }
 
 module.exports = GameWord;

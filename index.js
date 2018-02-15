@@ -128,10 +128,10 @@ function guessLetter(){
 
 // increment losses and trigger new game 
 function outOfGuesses(){
-
+	var word = gameState.currentWord.newWord
 	console.log("\n---------------------------------")
 	console.log("\n ╮(╯▽╰)╭");
-	console.log("\n Out of Guesses.", gameState.currentWord.newWord, "was the word. You lose");
+	console.log("\n Out of Guesses.", word.toUpperCase(), "was the word. You lose");
 	console.log("\n---------------------------------")
 	console.log("\n");
 
